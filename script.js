@@ -293,10 +293,6 @@ function playerReset() {
 
     if (collide(arena, player)) {
         sound.gameOver();
-        arena.forEach(row => row.fill(0));
-        player.score = 0;
-        player.lines = 0;
-        updateScore();
 
         paused = true;
         player.matrix = null;
@@ -370,7 +366,12 @@ document.getElementById('start-btn').addEventListener('click', () => {
     const btn = document.getElementById('start-btn');
 
     if (player.matrix === null) {
-        // Initial Start
+        // Initial Start or Restart after Game Over
+        arena.forEach(row => row.fill(0));
+        player.score = 0;
+        player.lines = 0;
+        updateScore();
+
         sound.init();
         sound.start();
         playerReset();
