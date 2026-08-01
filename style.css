@@ -9,6 +9,22 @@ body {
     margin: 0;
 }
 
+.game-title {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: rotate(-90deg) translateY(-50%);
+    transform-origin: left center;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #e94560;
+    letter-spacing: 15px;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+}
+
 .game-container {
     display: flex;
     gap: 20px;

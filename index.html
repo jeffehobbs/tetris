@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="game-title">TETRIS</div>
     <div class="game-container">
         <canvas id="tetris" width="240" height="400"></canvas>
         <div class="sidebar">
+            <div class="stat-box">
+                <div class="label">HIGH SCORE</div>
+                <div id="high-score" class="value">0</div>
+            </div>
             <div class="stat-box">
                 <div class="label">SCORE</div>
                 <div id="score" class="value">0</div>
@@ -31,6 +36,8 @@
             <button id="start-btn">Start Game</button>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

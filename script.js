@@ -145,12 +145,22 @@ function drawMatrix(matrix, offset, ctx) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value !== 0) {
+                const xPos = x + offset.x;
+                const yPos = y + offset.y;
+
+                // Base color
                 ctx.fillStyle = COLORS[value];
-                ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
-                // Add a small border to each block for better look
-                ctx.lineWidth = 0.05;
-                ctx.strokeStyle = 'white';
-                ctx.strokeRect(x + offset.x, y + offset.y, 1, 1);
+                ctx.fillRect(xPos, yPos, 1, 1);
+
+                // Glossy highlight (top and left edges)
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.fillRect(xPos, yPos, 1, 0.1); // top line
+                ctx.fillRect(xPos, yPos, 0.1, 1); // left line
+
+                // Subtle shadow (bottom and right edges)
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(xPos, yPos + 0.9, 1, 0.1); // bottom line
+                ctx.fillRect(xPos + 0.9, yPos, 0.1, 1); // right line
             }
         });
     });
@@ -294,6 +304,12 @@ function playerReset() {
 function updateScore() {
     document.getElementById('score').innerText = player.score;
     document.getElementById('lines').innerText = player.lines;
+
+    if (player.score > player.highScore) {
+        player.highScore = player.score;
+        localStorage.setItem('tetrisHighScore', player.highScore);
+    }
+    document.getElementById('high-score').innerText = player.highScore;
 }
 
 let dropCounter = 0;
@@ -324,6 +340,7 @@ const player = {
     next: null,
     score: 0,
     lines: 0,
+    highScore: parseInt(localStorage.getItem('tetrisHighScore')) || 0,
 };
 
 document.addEventListener('keydown', event => {
@@ -362,3 +379,21 @@ document.getElementById('start-btn').addEventListener('click', () => {
         btn.innerText = paused ? 'Resume' : 'Pause';
     }
 });
+
+VANTA.NET({
+    el: 'body',
+    mouseControls: true,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200,
+    minWidth: 200,
+    scale: 1.0,
+    scaleMobile: 1.0,
+    color: 0x3f51b5,
+    backgroundColor: 0x1a1a2e,
+    points: 10.0,
+    maxDistance: 20.0,
+    distanceBetween: 100.0,
+});
+
+updateScore();
