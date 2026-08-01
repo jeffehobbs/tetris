@@ -297,6 +297,10 @@ function playerReset() {
         player.score = 0;
         player.lines = 0;
         updateScore();
+
+        paused = true;
+        player.matrix = null;
+        document.getElementById('start-btn').innerText = 'Start Game';
     }
     drawNext();
 }
