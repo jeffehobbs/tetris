@@ -72,7 +72,7 @@ canvas {
 
 .value {
     font-size: 1.5rem;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: ui-monospace, "SF Mono", 'Courier New', Courier, monospace;
 }
 
 #next {
