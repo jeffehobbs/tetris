@@ -362,7 +362,15 @@ document.addEventListener('keydown', event => {
     }
 });
 
+// --- Mobile Controls ---
+document.getElementById('btn-left').addEventListener('click', () => playerMove(-1));
+document.getElementById('btn-right').addEventListener('click', () => playerMove(1));
+document.getElementById('btn-down').addEventListener('click', () => playerDrop());
+document.getElementById('btn-up').addEventListener('click', () => playerRotate(1));
+document.getElementById('btn-drop').addEventListener('click', () => playerHardDrop());
+
 document.getElementById('start-btn').addEventListener('click', () => {
+
     const btn = document.getElementById('start-btn');
 
     if (player.matrix === null) {
